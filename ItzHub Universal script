@@ -1,0 +1,218 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Window = OrionLib:MakeWindow({Name = "Itzhub|Universal", HidePremium = true, IntroText = "ItzHub", SaveConfig = true, ConfigFolder = "ItzHub"})
+
+local Tab = Window:MakeTab({
+	Name = "Player",
+	Icon = "https://cdn.memes.com/profilepics/39620021620724256/imageThumb/1620724256_thumb.jpg",
+	PremiumOnly = false
+})
+--speed and jump
+local auto = Tab:AddSection({
+	Name = "Speed and Jumppower"
+})
+
+Tab:AddSlider({
+	Name = "Speed",
+	Min = 16,
+	Max = 250,
+	Default = 5,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = " ",
+	Callback = function(Value)
+		game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+	end    
+})
+
+Tab:AddSlider({
+	Name = "JumpPower",
+	Min = 50,
+	Max = 125,
+	Default = 5,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = " ",
+	Callback = function(Value)
+		game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+	end    
+})
+--INF JUMP
+local auto = Tab:AddSection({
+	Name = "Infinite Jump"
+})
+Tab:AddButton({
+	Name = "Infinite Jump on",
+	Callback = function()
+      		_G.infinjump = true
+ 
+                                 local Player = game:GetService("Players").LocalPlayer
+                                 local Mouse = Player:GetMouse()
+                                 Mouse.KeyDown:connect(function(k)
+                                 if _G.infinjump then
+                                 if k:byte() == 32 then
+                                 Humanoid = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+                                 Humanoid:ChangeState("Jumping")
+                                 wait(0.1)
+                                 Humanoid:ChangeState("Seated")
+                                 end
+                                 end
+                                 end)
+ 
+                                 local Player = game:GetService("Players").LocalPlayer
+                                 local Mouse = Player:GetMouse()
+                                 Mouse.KeyDown:connect(function(k)
+                                 k = k:lower()
+                                 if k == "r" then
+                                 if _G.infinjump == true then
+                                 _G.infinjump = false
+                                 else
+                                 _G.infinjump = true
+                                   end
+                                  end
+                                 end)
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Infinite Jump off",
+	Callback = function()
+      		_G.infinjump = false
+ 
+                                 local Player = game:GetService("Players").LocalPlayer
+                                 local Mouse = Player:GetMouse()
+                                 Mouse.KeyDown:connect(function(k)
+                                 if _G.infinjump then
+                                 if k:byte() == 32 then
+                                 Humanoid = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+                                 Humanoid:ChangeState("Jumping")
+                                 wait(0.1)
+                                 Humanoid:ChangeState("Seated")
+                                 end
+                                 end
+                                 end)
+ 
+                                 local Player = game:GetService("Players").LocalPlayer
+                                 local Mouse = Player:GetMouse()
+                                 Mouse.KeyDown:connect(function(k)
+                                 k = k:lower()
+                                 if k == "r" then
+                                 if _G.infinjump == true then
+                                 _G.infinjump = false
+                                 else
+                                 _G.infinjump = true
+                                   end
+                                  end
+                                 end)
+  	end    
+})
+
+
+local Tab = Window:MakeTab({
+	Name = "Visuals",
+	Icon = "https://cdn.memes.com/profilepics/39620021620724256/imageThumb/1620724256_thumb.jpg",
+	PremiumOnly = false
+})
+
+local auto = Tab:AddSection({
+	Name = "Field Of View"
+})
+
+Tab:AddSlider({
+	Name = "FOV",
+	Min = 70,
+	Max = 150,
+	Default = 5,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = " ",
+	Callback = function(Value)
+		local FovNumber = Value
+local Camera = workspace.CurrentCamera
+Camera.FieldOfView = FovNumber
+	end    
+})
+
+local auto = Tab:AddSection({
+	Name = "Esp"
+})
+
+Tab:AddToggle({
+	Name = "ESP",
+	Default = false,
+	Callback = function(Value)
+		getgenv().esp = Value
+		spawn(function()
+		while wait() do
+		    if not getgenv().esp then
+		          for i,v in pairs(game.Players:GetChildren()) do
+		              if v.Character and v.Character:FindFirstChild("Highlight") then
+		                  local Highlight = v.Character:FindFirstChild("Highlight")
+		                  Highlight.Enabled = false
+    		      end
+		      end 
+		      else
+		          for i,v in pairs(game.Players:GetChildren()) do
+		             if getgenv().teamcheck == true then
+		               if v.Character and v ~= game.Players.LocalPlayer and v.TeamColor ~= game.Players.LocalPlayer.TeamColor then
+    		                 if v.Character:FindFirstChild("Highlight") then
+    		                 local Highlight = v.Character:FindFirstChild("Highlight") 
+    		                 Highlight.Enabled = true
+    		                 Highlight.FillColor = getgenv().Color
+    		                 Highlight.Adornee = v.Character
+    		                 else
+    		                 local Highlight = Instance.new("Highlight",v.Character)
+    		                 Highlight.Enabled = true
+    		                 Highlight.FillColor = getgenv().Color
+    		                 Highlight.Adornee = v.Character
+    		              end       
+    		           end  
+		                if v.TeamColor == game.Players.LocalPlayer.TeamColor then
+    		              if v.Character and v.Character:FindFirstChild("Highlight") then
+    		                  local Highlight = v.Character:FindFirstChild("Highlight")
+        		              Highlight.Enabled = false
+        		          end    
+    		            end 
+    		          else
+    		              if v.Character and v ~= game.Players.LocalPlayer then
+    		                 if v.Character:FindFirstChild("Highlight") then
+    		                 local Highlight = v.Character:FindFirstChild("Highlight") 
+    		                 Highlight.Enabled = true
+    		                 Highlight.FillColor = getgenv().Color
+    		                 Highlight.Adornee = v.Character
+    		                 else
+    		                 local Highlight = Instance.new("Highlight",v.Character)
+    		                 Highlight.Enabled = true
+    		                 Highlight.FillColor = getgenv().Color
+    		                 Highlight.Adornee = v.Character
+    		              end       
+    		           end    
+		            end       
+		      end    
+		    end  
+		end    
+		end)
+	end    
+})
+Tab:AddColorpicker({
+	Name = "Esp Color",
+	Default = Color3.fromRGB(0, 0, 0),
+	Callback = function(Value)
+		getgenv().Color = Value
+	end	  
+})
+
+local Tab = Window:MakeTab({
+	Name = "Fps",
+	Icon = "https://cdn.memes.com/profilepics/39620021620724256/imageThumb/1620724256_thumb.jpg",
+	PremiumOnly = false
+})
+local auto = Tab:AddSection({
+	Name = "Unlock Fps"
+})
+Tab:AddButton({
+	Name = "Unlock fps",
+	Callback = function()
+                   setfpscap(100000)
+  	end    
+})
